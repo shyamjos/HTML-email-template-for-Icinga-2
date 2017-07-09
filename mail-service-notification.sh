@@ -1,5 +1,31 @@
 #!/bin/sh
-#shyamjos.com
+# shyamjos.com (2017)
+
+
+if [ "$SERVICESTATE" = "CRITICAL" ]
+then
+	color=#FF5566
+
+elif [ "$SERVICESTATE" = "WARNING" ]
+then
+	color=#FFAA44
+
+elif [ "$SERVICESTATE" = "UNKNOWN" ]
+then
+	color=#90A4AE
+
+elif [ "$SERVICESTATE" = "DOWN" ]
+then
+	color=#FF5566
+
+#else [ "$SERVICESTATE" = "OK" ]
+#then
+else
+	color=#44BB77
+
+fi
+
+
 template=`cat <<TEMPLATE
 <!DOCTYPE html>
 <html>
@@ -18,14 +44,14 @@ td, th {
 }
 
 tr:nth-child(even) {
-    background-color: #a1e2d6;
+    background-color: #ffffff;
 }
 </style>
 </head>
 <body>
 
 <table>
-<th colspan=2 bgcolor=#17B294><center>Server Monitoring</center></th>
+<th colspan=2 bgcolor=#17B294><center>Icinga Server Monitoring</center></th>
 <tr>
 <td>Notification Type:</td>
 <td>$NOTIFICATIONTYPE</td>
@@ -44,7 +70,7 @@ tr:nth-child(even) {
 </tr>
 <tr>
 <td>State</td>
-<td>$SERVICESTATE</td>
+<td><b>$SERVICESTATE</b></td>
 </tr>
 <tr>
 <td>Date/Time</td>
@@ -52,7 +78,7 @@ tr:nth-child(even) {
 </tr>
 <tr>
 <td>Additional Info</td>
-<td>$SERVICEOUTPUT</td>
+<td bgcolor=$color><b>$SERVICEOUTPUT</b></td>
 </tr>
 <tr>
 <td>Comment</td>
@@ -60,7 +86,7 @@ tr:nth-child(even) {
 </tr>
 <tr>
 <td>Alert History</td>
-<td><a  target="_blank"  href="http://monitoring.example.com/icingaweb2/dashboard#!/icingaweb2/monitoring/host/history?host=$HOSTALIAS"> Open Dashboard </a></td>
+<td><a  target="_blank"  href="http://192.168.60.1/icingaweb2/dashboard#!/icingaweb2/monitoring/host/history?host=$HOSTALIAS"> Open Dashboard </a></td>
 </tr>
 </table>
 
@@ -68,5 +94,6 @@ tr:nth-child(even) {
 </html>
 TEMPLATE
 `
+#Do not remove -e 'my_hdr From:', This is used for setting 'from' address in mutt
 
-/usr/bin/printf "%b" "$template" | mail -a 'MIME-Version: 1.0' -a 'Content-Type: text/html' -r 'Monitoring Alert <alerts@monitoring.example.com>' -s "$NOTIFICATIONTYPE - $HOSTDISPLAYNAME - $SERVICEDISPLAYNAME is $SERVICESTATE" $USEREMAIL
+/usr/bin/printf "%b" "$template" | mutt -e "set content_type=text/html" -e 'my_hdr From:Icinga Alert <icinga-alerts@example.com>' -s "$NOTIFICATIONTYPE - $HOSTDISPLAYNAME - $SERVICEDISPLAYNAME is $SERVICESTATE" $USEREMAIL

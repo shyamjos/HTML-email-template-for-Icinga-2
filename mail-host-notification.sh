@@ -1,5 +1,19 @@
 #!/bin/sh
-# shyamjos.com
+# shyamjos.com (2017)
+
+if [ "$HOSTSTATE" = "DOWN" ]
+then
+        color=#FF5566
+
+#elif [ "$HOSTSTATE" = "UP" ]
+#then
+else
+        color=#44BB77
+
+fi
+
+
+
 template=`cat <<TEMPLATE
 <!DOCTYPE html>
 <html>
@@ -18,14 +32,14 @@ td, th {
 }
 
 tr:nth-child(even) {
-    background-color: #a1e2d6;
+    background-color: #fffff;
 }
 </style>
 </head>
 <body>
 
 <table>
-<th colspan=2 bgcolor=#17B294><center> Server Monitoring</center></th>
+<th colspan=2 bgcolor=#17B294><center>Icinga Server Monitoring</center></th>
 
 <tr>
 <td>Notification Type</td>
@@ -45,7 +59,7 @@ tr:nth-child(even) {
 
 <tr>
 <td>State </td>
-<td>$HOSTSTATE</td>
+<td bgcolor=$color><b>$HOSTSTATE</b></td>
 </tr>
 
 <tr>
@@ -66,7 +80,7 @@ tr:nth-child(even) {
 
 <tr>
 <td>Alert History</td>
-<td><a  target="_blank"  href="http://monitoring.example.com/icingaweb2/dashboard#!/icingaweb2/monitoring/host/history?host=$HOSTALIAS"> Open Dashboard </a></td>
+<td><a  target="_blank"  href="http://192.168.60.1/icingaweb2/dashboard#!/icingaweb2/monitoring/host/history?host=$HOSTALIAS"> Open Dashboard </a></td>
 </tr>
 </table>
 
@@ -74,6 +88,6 @@ tr:nth-child(even) {
 </html>
 TEMPLATE
 `
+#Do not remove -e 'my_hdr From:', This is used for setting 'from' address in mutt
 
-/usr/bin/printf "%b" "$template" | mail  -a 'MIME-Version: 1.0' -a 'Content-Type: text/html' -r 'Monitoring Alert <alerts@monitoring.example.com>' -s "$NOTIFICATIONTYPE - $HOSTDISPLAYNAME is $HOSTSTATE" $USEREMAIL
-
+/usr/bin/printf "%b" "$template" | mutt -e "set content_type=text/html" -e 'my_hdr From:Icinga Alert <icinga-alerts@example.com>' -s "$NOTIFICATIONTYPE - $HOSTDISPLAYNAME is $HOSTSTATE" $USEREMAIL
