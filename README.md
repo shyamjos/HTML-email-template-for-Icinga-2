@@ -6,5 +6,5 @@ Also I have added new color highlight feature for different states (ok=green,war
 # Demo 
 
 ![alt text](https://linuxsuperuser.com/wp-content/uploads/2017/07/icinga-2-html-email-template.png "HTML email alert Template for Icinga 2")
-# Installtion 
+# Installation 
 Tutorial : https://linuxsuperuser.com/icinga2-html-template/
