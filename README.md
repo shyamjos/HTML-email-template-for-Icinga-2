@@ -8,7 +8,7 @@ Also I have added new color highlight feature for different states (ok=green,war
 ![alt text](https://linuxsuperuser.com/wp-content/uploads/2017/07/icinga-2-html-email-template.png "HTML email alert Template for Icinga 2")
 # Installation 
 
-Take backup of exsisting files in `/etc/icinga2/scripts` and copy this new scripts to it 
+Take backup of existing files in `/etc/icinga2/scripts` and copy this new scripts to it 
 
 Edit the "Variables for HTML Template" section in mail-service-notification.sh
 ```
