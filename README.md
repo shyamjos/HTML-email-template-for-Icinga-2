@@ -6,5 +6,23 @@ Also I have added new color highlight feature for different states (ok=green,war
 # Demo 
 
 ![alt text](https://linuxsuperuser.com/wp-content/uploads/2017/07/icinga-2-html-email-template.png "HTML email alert Template for Icinga 2")
-# Installation 
-Tutorial : https://linuxsuperuser.com/icinga2-html-template/
+
+# Configuration 
+
+Edit the "Variables for HTML Template" section in mail-service-notification.sh
+
+```SUBJECT="$SERVICEDISPLAYNAME $SERVICESTATE! - $HOSTDISPLAYNAME"
+TITLE="Icinga Server Monitoring"
+ICINGAWEBURL="http://YOUR-IP:PORT/icingaweb2/dashboard#!/icingaweb2/monitoring/service/history?host=$HOSTDISPLAYNAME&service=$SERVICENAME"
+FROMNAME="Icinga Alerts"
+FROMEMAIL="icinga-alerts@your-company.com"```
+	
+Edit the "Variables for HTML Template" section in mail-host-notification.sh
+
+```SUBJECT="[ $HOSTSTATE ] - $HOSTDISPLAYNAME is $HOSTSTATE"
+TITLE="Icinga Server Monitoring"
+ICINGAWEBURL="http://YOUR-IP:PORT/icingaweb2/dashboard#!/icingaweb2/monitoring/host/history?host=$HOSTDISPLAYNAME"
+FROMNAME="Icinga Alerts"
+FROMEMAIL="icinga-alerts@your-company.com"```
+
+Complete Tutorial : https://linuxsuperuser.com/icinga2-html-template/
