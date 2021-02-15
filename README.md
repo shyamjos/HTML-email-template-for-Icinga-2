@@ -5,7 +5,10 @@ Update: I have replaced mail command with mutt due to incompatibility of options
 Also I have added new color highlight feature for different states (ok=green,warning=orange and critical=red).
 # Screenshot 
 
-![alt text](https://linuxsuperuser.com/wp-content/uploads/2017/07/icinga-2-html-email-template.png "HTML email alert Template for Icinga 2")
+![alt text](https://shyamjos.com/assets/img/icinga2/icinga-html-email.png)
+![alt text](https://shyamjos.com/assets/img/icinga2/html-template-for-icinga.png)
+![alt text](https://shyamjos.com/assets/img/icinga2/icinga-2-html-email-template.png)
+
 # Installation 
 
 Take backup of existing files in `/etc/icinga2/scripts` and copy this new scripts to it 
@@ -26,4 +29,4 @@ ICINGAWEBURL="http://YOUR-IP:PORT/icingaweb2/dashboard#!/icingaweb2/monitoring/h
 FROMNAME="Icinga Alerts"
 FROMEMAIL="icinga-alerts@your-company.com" 
 ```
-Complete Tutorial : https://linuxsuperuser.com/icinga2-html-template/
+Complete Tutorial : https://shyamjos.com/icinga2-html-template/
