@@ -27,6 +27,7 @@ Required parameters:
   -r USEREMAIL (\$user.email\$)
   -s HOSTSTATE (\$host.state\$)
   -t NOTIFICATIONTYPE (\$notification.type\$)
+  -X HOSTNOTES (\$host.notes\$)
 
 Optional parameters:
   -4 HOSTADDRESS (\$address\$)
@@ -64,7 +65,7 @@ urlencode() {
 }
 
 ## Main
-while getopts 4:6::b:c:d:f:hi:l:n:o:r:s:t:v: opt
+while getopts 4:6::b:c:d:f:hi:l:n:o:r:s:t:v:X: opt
 do
   case "$opt" in
     4) HOSTADDRESS=$OPTARG ;;
@@ -82,6 +83,7 @@ do
     s) HOSTSTATE=$OPTARG ;; # required
     t) NOTIFICATIONTYPE=$OPTARG ;; # required
     v) VERBOSE=$OPTARG ;;
+    X) HOSTNOTES=$OPTARG ;;
    \?) echo "ERROR: Invalid option -$OPTARG" >&2
        Error ;;
     :) echo "Missing option argument for -$OPTARG" >&2
