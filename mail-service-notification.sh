@@ -28,6 +28,8 @@ Required parameters:
   -s SERVICESTATE (\$service.state\$)
   -t NOTIFICATIONTYPE (\$notification.type\$)
   -u SERVICEDISPLAYNAME (\$service.display_name\$)
+  -X HOSTNOTES (\$host.notes\$)
+  -x SERVICENOTES (\$service.notes\$)
 
 Optional parameters:
   -4 HOSTADDRESS (\$address\$)
@@ -65,7 +67,7 @@ urlencode() {
 }
 
 ## Main
-while getopts 4:6:b:c:d:e:f:hi:l:n:o:r:s:t:u:v: opt
+while getopts 4:6:b:c:d:e:f:hi:l:n:o:r:s:t:u:v:X:x: opt
 do
   case "$opt" in
     4) HOSTADDRESS=$OPTARG ;;
@@ -85,6 +87,8 @@ do
     t) NOTIFICATIONTYPE=$OPTARG ;; # required
     u) SERVICEDISPLAYNAME=$OPTARG ;; # required
     v) VERBOSE=$OPTARG ;;
+    X) HOSTNOTES=$OPTARG ;;
+    x) SERVICENOTES=$OPTARG ;;
    \?) echo "ERROR: Invalid option -$OPTARG" >&2
        Usage ;;
     :) echo "Missing option argument for -$OPTARG" >&2
